@@ -26,6 +26,22 @@ const UserSchema = new Schema({
     telefono: {
       type: String,
       required: true
+    },
+    role:{
+      type: String,
+      default: 'usuario',
+      enum:[
+        'usuario',
+        'administrador'
+      ]      
+    },
+    sing_up_date:{
+      type: Date,
+      default: Date.now()
+    },
+    last_login_date:{
+      type: Date,
+      default: Date
     }
 });
 
