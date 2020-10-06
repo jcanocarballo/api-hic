@@ -38,6 +38,10 @@ class AuthService {
         }
         const userToEncode = {
             username: userExist.username,
+            name: userExist.name,
+            ape_pat: userExist.ape_pat,
+            ape_mat: userExist.ape_mat,
+            telefono: userExist.telefono,
             id: userExist._id,
         };
         const token = JwtHelper.generateToken(userToEncode);
