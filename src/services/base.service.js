@@ -1,3 +1,5 @@
+const { ErrorHelper } = require('../helpers')
+
 class BaseService {
   constructor(repository) {
       this.repository = repository;
@@ -5,17 +7,11 @@ class BaseService {
 
   async get(id) {
       if (!id) {
-          const error = new Error();
-          error.status = 400;
-          error.message = "El id no ha sido enviado.";
-          throw error;
+        ErrorHelper.error(400, "El id no ha sido enviado.");
       }
       const currentEntity = await this.repository.get(id);
       if (!currentEntity) {
-          const error = new Error();
-          error.status = 404;
-          error.message = "El item no existe en la BD.";
-          throw error;
+        ErrorHelper.error(404, "El item no existe en la BD.");
       }
       return currentEntity;
   }
@@ -30,20 +26,14 @@ class BaseService {
 
   async update(id, entity) {
       if (!id) {
-          const error = new Error();
-          error.status = 400;
-          error.message = "El id no ha sido enviado.";
-          throw error;
+        ErrorHelper.error(400, "El id no ha sido enviado.");
       }
       return await this.repository.update(id, entity);
   }
 
   async delete(id) {
       if (!id) {
-          const error = new Error();
-          error.status = 400;
-          error.message = "El id no ha sido enviado.";
-          throw error;
+        ErrorHelper.error(400, "El id no ha sido enviado.");
       }
       return await this.repository.delete(id);
   }

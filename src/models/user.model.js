@@ -33,7 +33,7 @@ const UserSchema = new Schema({
       enum:[
         'usuario',
         'administrador'
-      ]      
+      ]
     },
     sing_up_date:{
       type: Date,
