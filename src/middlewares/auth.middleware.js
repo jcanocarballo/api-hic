@@ -1,22 +1,26 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config');
+const { ErrorHelper } = require('../helpers')
 
 module.exports = function(req, res, next) {
     const token = req.headers['authorization'];
     if (!token) {
-        const error = new Error();
-        error.status = 400;
-        error.message = "El token no ha sido enviado.";
-        throw error;
+      ErrorHelper.error(403, "No tienes los permisos para acceder al recurso.");
     }
     jwt.verify(token, JWT_SECRET, function(err, decodedToken) {
         if (err) {
-            const error = new Error();
-            error.status = 401;
-            error.message = "El token es invalido.";
-            throw error;
+          ErrorHelper.error(403, "El token de authenticacion no es valido.");            
         }
-        req.user = decodedToken.user;
-        next();
+        if(req.method != 'GET'){
+          if(decodedToken.user.role == 'administrador'){
+            req.user = decodedToken.user;
+            next(); 
+          }else{
+            ErrorHelper.error(403, "No tienes los permisos para acceder al recurso.");
+          }
+        }else{
+          req.user = decodedToken.user;
+          next(); 
+        }        
     });
 }

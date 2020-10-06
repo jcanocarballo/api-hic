@@ -1,4 +1,4 @@
-const { JwtHelper } = require('../helpers');
+const { JwtHelper, ErrorHelper } = require('../helpers');
 let _userService = null;
 
 class AuthService {
@@ -11,10 +11,7 @@ class AuthService {
         const userExist = await _userService.getUserByUsername(username)
 
         if (userExist) {
-            const error = new Error();
-            error.status = 400;
-            error.message = "El usuario ya existe";
-            throw error;
+          ErrorHelper.error(400, "El usuario ya existe");
         }
         return await _userService.create(user);
     }
@@ -24,17 +21,11 @@ class AuthService {
         const userExist = await _userService.getUserByUsername(username)
 
         if (!userExist) {
-            const error = new Error();
-            error.status = 404;
-            error.message = "Credenciales invalidas";
-            throw error;
+          ErrorHelper.error(404, "Credenciales invalidas");
         }
         const validPassword = userExist.comparePasswords(password);
         if (!validPassword) {
-            const error = new Error();
-            error.status = 400;
-            error.message = "Credenciales invalidas";
-            throw error;
+          ErrorHelper.error(404, "Credenciales invalidas");
         }
         const userToEncode = {
             username: userExist.username,
@@ -42,6 +33,7 @@ class AuthService {
             ape_pat: userExist.ape_pat,
             ape_mat: userExist.ape_mat,
             telefono: userExist.telefono,
+            role: userExist.role,
             id: userExist._id,
         };
         const token = JwtHelper.generateToken(userToEncode);

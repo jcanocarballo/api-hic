@@ -11,8 +11,8 @@ module.exports = function({
 }) {
   const router = Router();
 
-  router.get("/", [ParseIntMiddleware], UserController.getAll);
-  router.get("/:userId", UserController.get);
+  router.get("/", [ParseIntMiddleware, AuthMiddleware], UserController.getAll);
+  router.get("/:userId", [AuthMiddleware], UserController.get);
   router.put("/:userId", [AuthMiddleware], UserController.update);
   router.delete("/:userId", [AuthMiddleware], UserController.delete);
 
