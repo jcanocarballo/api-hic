@@ -1,6 +1,6 @@
 module.exports = (err, req, res, next) => {
-  console.log(err)
-  const httpStatus = err.status || 500;
+  console.log("Error => " + JSON.stringify(err))
+  const httpStatus = err.status || 400;
 
   return res.status(httpStatus).send({
       status: httpStatus,
