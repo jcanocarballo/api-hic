@@ -8,12 +8,10 @@ const UserSchema = new Schema({
         required: true
     },
     ape_pat:{
-      type: String,
-      required: true
+      type: String
     },
     ape_mat:{
-      type: String,
-      required: true
+      type: String
     },
     username: {
         type: String,
