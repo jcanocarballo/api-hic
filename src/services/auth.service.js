@@ -12,7 +12,7 @@ class AuthService {
 
         if (userExist) {
           ErrorHelper.error(400, "El usuario ya existe");
-        }
+        }        
         return await _userService.create(user);
     }
 
@@ -27,17 +27,25 @@ class AuthService {
         if (!validPassword) {
           ErrorHelper.error(404, "Credenciales invalidas");
         }
-        const userToEncode = {
+        const expiresIn = 24 * 60 * 60;   
+        const token = JwtHelper.generateToken({ username: userExist.username,role: userExist.role, id: userExist._id }, expiresIn);     
+          
+        const dataUser = {
             username: userExist.username,
             name: userExist.name,
             ape_pat: userExist.ape_pat,
             ape_mat: userExist.ape_mat,
             telefono: userExist.telefono,
             role: userExist.role,
-            id: userExist._id,
+            last_login_date: userExist.last_login_date,
+            _id: userExist._id, 
+            accessToken: token, 
+            expiresIn: expiresIn            
         };
-        const token = JwtHelper.generateToken(userToEncode);
-        return { token, user: userExist };
+        
+        return {           
+          dataUser
+        };
     }
 }
 
