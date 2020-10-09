@@ -12,12 +12,8 @@ class AuthService {
 
         if (userExist) {
           ErrorHelper.error(400, "El usuario ya existe");
-        }
-        const userCreado = await _userService.create(user);
-        if(!userCreado){
-          ErrorHelper.error(500, "Ocurrio un error al crear el usuario");
-        }
-        return this.signIn(user);
+        }        
+        return await _userService.create(user);
     }
 
     async signIn(user) {
