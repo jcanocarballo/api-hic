@@ -40,7 +40,8 @@ class AuthService {
             last_login_date: userExist.last_login_date,
             _id: userExist._id, 
             accessToken: token, 
-            expiresIn: expiresIn            
+            expiresIn: expiresIn,
+            image: userExist.image           
         };
         
         return {           

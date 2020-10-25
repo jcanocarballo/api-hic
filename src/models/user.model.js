@@ -33,6 +33,9 @@ const UserSchema = new Schema({
         'administrador'
       ]
     },
+    image: {
+      type: String
+    },
     sing_up_date:{
       type: Date,
       default: Date.now()
