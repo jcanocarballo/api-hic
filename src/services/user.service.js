@@ -22,10 +22,9 @@ class UserService extends BaseService {
           ErrorHelper.error(404, "No se ha subido ningun archivo.");        
         }
         let file_path = files.image.path;
-        console.log(file_path);
-        let file_split = file_path.split('\\');
+        let file_split = file_path.split('/');
         let file_name = file_split[2];
-        let ext_split = file_name.split('\.');
+        let ext_split = file_name.split('.');
         let file_ext = ext_split[1];
   
         if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif'){
