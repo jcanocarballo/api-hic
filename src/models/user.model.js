@@ -38,7 +38,7 @@ const UserSchema = new Schema({
     },
     sing_up_date:{
       type: Date,
-      default: Date.now()
+      default: Date.now
     },
     last_login_date:{
       type: Date,
