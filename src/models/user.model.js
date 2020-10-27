@@ -27,10 +27,10 @@ const UserSchema = new Schema({
     },
     role:{
       type: String,
-      default: 'usuario',
+      default: 'ROL_USER',
       enum:[
-        'usuario',
-        'administrador'
+        'ROL_USER',
+        'ROL_ADMIN'
       ]
     },
     image: {
