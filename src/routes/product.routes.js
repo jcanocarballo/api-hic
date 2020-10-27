@@ -15,7 +15,7 @@ module.exports = function({
   const router = Router();
 
   router.get("/", [ParseIntMiddleware], ProductController.getAll);
-  router.get("/:productId", [AuthMiddleware], ProductController.get);
+  router.get("/:productId", ProductController.get);
   router.post("/", [AuthMiddleware], ProductController.create);
   router.put("/:productId", [AuthMiddleware], ProductController.update);
   router.delete("/:productId", [AuthMiddleware], ProductController.delete);
