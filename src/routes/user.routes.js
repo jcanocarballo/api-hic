@@ -18,8 +18,8 @@ module.exports = function({
   router.get("/:userId", [AuthMiddleware], UserController.get);
   router.put("/:userId", [AuthMiddleware], UserController.update);
   router.delete("/:userId", [AuthMiddleware], UserController.delete);
-  router.post("/upload-image/:userId", [AuthMiddleware, md_upload], UserController.uploadImage);
-  router.get("/get-image-file/:imageFile", UserController.getImageFile)
+  router.post("/upload-image-user/:userId", [AuthMiddleware, md_upload], UserController.uploadImage);
+  router.get("/get-image-user/:imageFile", UserController.getImageFile)
 
   return router;
 }

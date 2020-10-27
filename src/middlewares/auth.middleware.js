@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
           ErrorHelper.error(403, "El token de authenticacion no es valido.");            
         }
         if(req.method != 'GET'){
-          if(decodedToken.user.role == 'administrador'){
+          if(decodedToken.user.role == 'ROL_ADMIN'){
             req.user = decodedToken.user;
             next(); 
           }else{

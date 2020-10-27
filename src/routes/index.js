@@ -8,7 +8,8 @@ const { NotFoundMiddleware, ErrorMiddleware } = require('../middlewares');
 module.exports = function({
     HomeRoutes,
     AuthRoutes,
-    UserRoutes
+    UserRoutes,
+    ProductRoutes
 }) {
     const router = express.Router();
     const apiRoutes = express.Router();
@@ -18,6 +19,7 @@ module.exports = function({
     apiRoutes.use("/home", HomeRoutes);
     apiRoutes.use("/auth", AuthRoutes);
     apiRoutes.use("/user", UserRoutes);
+    apiRoutes.use("/product", ProductRoutes);
 
     router.use("/v1/api", apiRoutes);
 

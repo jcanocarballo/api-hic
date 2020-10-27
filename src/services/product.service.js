@@ -1,16 +1,16 @@
 const BaseService = require('./base.service');
 const { ErrorHelper } = require('../helpers');
 
-let _userRepository = null;
+let _productRepository = null;
 
-class UserService extends BaseService {
-    constructor({ UserRepository }) {
-        super(UserRepository);
-        _userRepository = UserRepository;
+class ProductService extends BaseService {
+    constructor({ ProductRepository }) {
+        super(ProductRepository);
+        _productRepository = ProductRepository;
     }
 
-    async getUserByUsername(username) {
-        return await _userRepository.getUserByUsername(username);
+    async getProductByName(name) {
+        return await _productRepository.getProductByName(name);
     }
 
     async uploadImage(id, files){
@@ -21,7 +21,7 @@ class UserService extends BaseService {
         ErrorHelper.error(404, "No se ha subido ningun archivo.");        
       }
       let file_path = files.image.path;
-      let file_split = file_path.split('/');
+      let file_split = file_path.split('\\');
       let file_name = file_split[2];
       let ext_split = file_name.split('.');
       let file_ext = ext_split[1];
@@ -34,4 +34,4 @@ class UserService extends BaseService {
     }
 }
 
-module.exports = UserService;
+module.exports = ProductService;
