@@ -9,8 +9,22 @@ class ProductService extends BaseService {
         _productRepository = ProductRepository;
     }
 
+    async getProductByCodigo(codigo) {
+        return await _productRepository.getProductByCodigo(codigo);
+    }
+
     async getProductByName(name) {
-        return await _productRepository.getProductByName(name);
+      return await _productRepository.getProductByName(name);
+    }
+
+    async create(product){
+      const { codigo } = product;
+      const productExist = await this.getProductByCodigo(codigo)
+
+      if (productExist) {
+        ErrorHelper.error(400, "El codigo del producto ya existe");
+      }        
+      return await _productRepository.create(product);
     }
 
     async uploadImage(id, files){
