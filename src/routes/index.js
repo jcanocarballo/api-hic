@@ -9,7 +9,10 @@ module.exports = function({
     HomeRoutes,
     AuthRoutes,
     UserRoutes,
-    ProductRoutes
+    ProductRoutes,
+    CategoryRoutes,
+    ClientRoutes,
+    VentaRoutes
 }) {
     const router = express.Router();
     const apiRoutes = express.Router();
@@ -20,6 +23,9 @@ module.exports = function({
     apiRoutes.use("/auth", AuthRoutes);
     apiRoutes.use("/user", UserRoutes);
     apiRoutes.use("/product", ProductRoutes);
+    apiRoutes.use("/category", CategoryRoutes);
+    apiRoutes.use("/client", ClientRoutes);
+    apiRoutes.use("/venta", VentaRoutes);
 
     router.use("/v1/api", apiRoutes);
 

@@ -32,12 +32,6 @@ class VentaController {
 
         return res.send(updateVenta);
     }
-
-    async delete(req, res) {
-        const { ventaId } = req.params;
-        const deleteVenta = await _ventaService.delete(ventaId);
-        return res.send(deleteVenta);
-    }
 }
 
 module.exports = VentaController;
